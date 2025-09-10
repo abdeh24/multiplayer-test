@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcyibb21jqlvb"]
+
+[ext_resource type="Script" path="res://scripts/worldGen.gd" id="1_s4hyy"]
+[ext_resource type="TileSet" uid="uid://d3c76dwvj611o" path="res://res/land_tilemap.res" id="2_3ygrx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ben00"]
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wbo8b"]
+noise = SubResource("FastNoiseLite_ben00")
+
+[node name="world_gen" type="Node2D"]
+script = ExtResource("1_s4hyy")
+test = SubResource("NoiseTexture2D_wbo8b")
+
+[node name="tilemap_land" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_3ygrx")
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(2720, 1976)

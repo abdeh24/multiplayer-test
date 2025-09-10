@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjoaoheko3u2v"]
+
+[ext_resource type="Texture2D" uid="uid://ojyb6i7ekn6y" path="res://icon.svg" id="1_irldf"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_tm5e6"]
+[ext_resource type="Texture2D" uid="uid://0v7opow45c4m" path="res://textures/dev/player/base/leg.png" id="2_5n3dw"]
+[ext_resource type="Texture2D" uid="uid://b60wpwr1csnp1" path="res://textures/dev/player/base/head.png" id="2_ix3nr"]
+[ext_resource type="Texture2D" uid="uid://byts2xvm54cgx" path="res://textures/dev/player/base/body.png" id="3_5mpma"]
+[ext_resource type="Theme" uid="uid://ltd7h6njwe50" path="res://res/theme.tres" id="3_xic5n"]
+[ext_resource type="Texture2D" uid="uid://cd6s2xbhgivg2" path="res://textures/dev/player/base/eye.png" id="5_lop2k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0p644"]
+radius = 24.0
+height = 72.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b3mkn"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("nameTag:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(576, 328)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_tm5e6")
+
+[node name="animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../texture2/baseHead")
+
+[node name="texture2" type="CanvasGroup" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(3, 3)
+
+[node name="baseLeg" type="Sprite2D" parent="texture2"]
+texture = ExtResource("2_5n3dw")
+hframes = 3
+frame = 2
+
+[node name="baseBody" type="Sprite2D" parent="texture2"]
+position = Vector2(0, -4)
+texture = ExtResource("3_5mpma")
+hframes = 3
+frame = 2
+
+[node name="baseHead" type="Sprite2D" parent="texture2"]
+position = Vector2(0, -14.3333)
+texture = ExtResource("2_ix3nr")
+hframes = 3
+frame = 2
+
+[node name="eye" type="Sprite2D" parent="texture2"]
+visible = false
+position = Vector2(0, -12.6667)
+texture = ExtResource("5_lop2k")
+hframes = 3
+
+[node name="texture" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_irldf")
+
+[node name="nameTag" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = -80.0
+theme = ExtResource("3_xic5n")
+theme_override_font_sizes/font_size = 32
+text = "ERR/IOV"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("CapsuleShape2D_0p644")
+disabled = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_b3mkn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)

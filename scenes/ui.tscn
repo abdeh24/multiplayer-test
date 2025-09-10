@@ -1,0 +1,169 @@
+[gd_scene load_steps=10 format=3 uid="uid://cic6w6v6s1dht"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_1yxs7"]
+[ext_resource type="Texture2D" uid="uid://sc25fwvmiwqg" path="res://textures/dev/ui/control_stick_base.png" id="1_jkdnr"]
+[ext_resource type="Script" path="res://scripts/control.gd" id="2_cvbcf"]
+[ext_resource type="Theme" uid="uid://ltd7h6njwe50" path="res://res/theme.tres" id="3_ur4kn"]
+[ext_resource type="Script" path="res://scripts/chatTextBox.gd" id="4_8ebd4"]
+[ext_resource type="Texture2D" uid="uid://bdqox45wi42u" path="res://textures/dev/ui/control_stick_head.png" id="4_bqkee"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gifoo"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndfpx"]
+bg_color = Color(1, 0, 0, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs6x0"]
+bg_color = Color(0, 0, 0, 0.498039)
+
+[node name="ui" type="CanvasLayer"]
+script = ExtResource("1_1yxs7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_ur4kn")
+
+[node name="debug" type="VBoxContainer" parent="Control"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 160.0
+offset_right = 320.0
+offset_bottom = 288.0
+theme_override_constants/separation = 4
+
+[node name="position" type="Label" parent="Control/debug"]
+layout_mode = 2
+text = "Position : 4803, 4803"
+
+[node name="player_count" type="Label" parent="Control/debug"]
+layout_mode = 2
+text = "Players in World : 1"
+
+[node name="day_count" type="Label" parent="Control/debug"]
+layout_mode = 2
+text = "Days Played : NaN"
+
+[node name="death_count" type="Label" parent="Control/debug"]
+layout_mode = 2
+text = "Deaths Count : NaN"
+
+[node name="control" type="Container" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = -136.0
+offset_right = 128.0
+offset_bottom = -136.0
+theme = ExtResource("3_ur4kn")
+script = ExtResource("2_cvbcf")
+
+[node name="stick" type="CanvasGroup" parent="Control/control"]
+position = Vector2(32, 32)
+
+[node name="exit" type="Button" parent="Control/control/stick"]
+offset_left = -160.0
+offset_top = 40.0
+offset_right = -96.0
+offset_bottom = 103.0
+text = "EXIT"
+
+[node name="head" type="TextureButton" parent="Control/control/stick"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785398
+pivot_offset = Vector2(32, 32)
+theme = ExtResource("3_ur4kn")
+texture_normal = ExtResource("4_bqkee")
+metadata/_edit_use_anchors_ = true
+
+[node name="base" type="Sprite2D" parent="Control/control/stick"]
+position = Vector2(3.8147e-06, 3.8147e-06)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("1_jkdnr")
+
+[node name="zoom" type="CanvasGroup" parent="Control/control"]
+position = Vector2(-64, -128)
+
+[node name="in" type="Button" parent="Control/control/zoom"]
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 72.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "+"
+
+[node name="out" type="Button" parent="Control/control/zoom"]
+offset_left = -24.0
+offset_top = 8.0
+offset_right = 72.0
+offset_bottom = 104.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "-"
+
+[node name="chat" type="RichTextLabel" parent="Control"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -544.0
+offset_top = 88.0
+offset_right = -32.0
+offset_bottom = 112.0
+grow_horizontal = 0
+theme = ExtResource("3_ur4kn")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[wave]"
+scroll_following = true
+script = ExtResource("4_8ebd4")
+
+[node name="toggle_chat" type="CheckButton" parent="Control/chat"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 120.0
+offset_bottom = 64.0
+text = "EXPAND"
+
+[node name="input" type="LineEdit" parent="Control/chat"]
+layout_mode = 0
+offset_top = -56.0
+offset_right = 416.0
+offset_bottom = -16.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_gifoo")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ndfpx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gifoo")
+placeholder_text = "Text here~"
+
+[node name="send" type="Button" parent="Control/chat/input"]
+layout_mode = 0
+offset_left = 416.0
+offset_right = 512.0
+offset_bottom = 40.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_rs6x0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rs6x0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rs6x0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs6x0")
+text = ">>>"
+
+[connection signal="toggled" from="Control/chat/toggle_chat" to="Control/chat" method="_on_toggle_chat_toggled"]

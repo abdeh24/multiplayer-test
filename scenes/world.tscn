@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://m25edpdr8u3d"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_ocd2n"]
+[ext_resource type="PackedScene" uid="uid://cjoaoheko3u2v" path="res://scenes/player.tscn" id="2_ijueo"]
+[ext_resource type="PackedScene" uid="uid://cic6w6v6s1dht" path="res://scenes/ui.tscn" id="3_07nuq"]
+[ext_resource type="Gradient" uid="uid://c30gfk6p1op48" path="res://res/worldTerrainGradient.tres" id="3_2805t"]
+[ext_resource type="Texture2D" uid="uid://b4suu3ahmmk8l" path="res://textures/dev/tiles/tilemap_test.png" id="4_pprp8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gct1c"]
+seed = 4803
+frequency = 0.0038
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q2giy"]
+width = 128
+height = 128
+color_ramp = ExtResource("3_2805t")
+noise = SubResource("FastNoiseLite_gct1c")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyrdg"]
+texture = ExtResource("4_pprp8")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_b7gsc"]
+sources/0 = SubResource("TileSetAtlasSource_eyrdg")
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_ocd2n")
+playerScene = ExtResource("2_ijueo")
+noise_height_text = SubResource("NoiseTexture2D_q2giy")
+
+[node name="env" type="TileMapLayer" parent="."]
+
+[node name="ground" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_b7gsc")
+
+[node name="spawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="entity" type="CanvasGroup" parent="."]
+
+[node name="ui" parent="." instance=ExtResource("3_07nuq")]

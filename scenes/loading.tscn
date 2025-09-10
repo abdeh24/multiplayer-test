@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://d17h3rrpehefb"]
+
+[ext_resource type="Script" path="res://scripts/loading.gd" id="1_nkhck"]
+
+[node name="loading" type="CanvasLayer"]
+script = ExtResource("1_nkhck")
+
+[node name="vContainer" type="VBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = -128.0
+offset_bottom = 384.0
+
+[node name="percentage" type="Label" parent="vContainer"]
+layout_mode = 2
+text = "LOADING... 0%"
+horizontal_alignment = 1
+
+[node name="processed" type="Label" parent="vContainer"]
+layout_mode = 2
+text = "Generating Terrains..."
+horizontal_alignment = 1
+
+[node name="progress" type="ProgressBar" parent="vContainer"]
+layout_mode = 2
+step = 0.5

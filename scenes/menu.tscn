@@ -1,0 +1,714 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnul58cmnisd7"]
+
+[ext_resource type="Theme" uid="uid://ltd7h6njwe50" path="res://res/theme.tres" id="1_7s8b1"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_vhh23"]
+[ext_resource type="ButtonGroup" uid="uid://dk8x0dygsriwo" path="res://res/button_group_char.res" id="3_d7xvy"]
+[ext_resource type="Texture2D" uid="uid://0v7opow45c4m" path="res://textures/dev/player/base/leg.png" id="3_taxkv"]
+[ext_resource type="Texture2D" uid="uid://byts2xvm54cgx" path="res://textures/dev/player/base/body.png" id="4_ftbn5"]
+[ext_resource type="Texture2D" uid="uid://b60wpwr1csnp1" path="res://textures/dev/player/base/head.png" id="5_r2g50"]
+
+[sub_resource type="Gradient" id="Gradient_77fj3"]
+colors = PackedColorArray(0.1, 0.1, 0.1, 1, 0.2, 0.2, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0oq7k"]
+gradient = SubResource("Gradient_77fj3")
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vhh23")
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+[node name="Title" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 72.0
+offset_right = 1152.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7s8b1")
+
+[node name="textLabel" type="Label" parent="Title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Multiplayer Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="mainUI" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 128.0
+offset_right = 1152.0
+offset_bottom = 512.0
+grow_horizontal = 2
+theme = ExtResource("1_7s8b1")
+
+[node name="mainButton" type="VBoxContainer" parent="mainUI"]
+layout_mode = 2
+theme = ExtResource("1_7s8b1")
+theme_override_constants/separation = 8
+
+[node name="textLabel" type="Label" parent="mainUI/mainButton"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = ">-[ SELECT MODE ]-----------
+
+"
+
+[node name="hostWorld" type="Button" parent="mainUI/mainButton"]
+layout_mode = 2
+theme = ExtResource("1_7s8b1")
+text = "> Host World"
+alignment = 0
+
+[node name="joinWorld" type="Button" parent="mainUI/mainButton"]
+layout_mode = 2
+theme = ExtResource("1_7s8b1")
+text = "> Join World"
+alignment = 0
+
+[node name="nameTag" type="LineEdit" parent="mainUI/mainButton"]
+layout_mode = 2
+placeholder_text = "Enter Name"
+
+[node name="hostWorld" type="VBoxContainer" parent="mainUI"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="textLabel" type="Label" parent="mainUI/hostWorld"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = ">-[ HOST A WORLD ]----------
+
+"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="mainUI/hostWorld"]
+layout_mode = 2
+text = " 
+ 
+ 
+ 
+ "
+
+[node name="ItemList" type="ItemList" parent="mainUI/hostWorld/Label"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 429.0
+offset_bottom = 90.0
+item_count = 3
+item_0/text = "WORLD EXAMPLE"
+item_1/text = "..."
+item_2/text = "..."
+
+[node name="LineEdit" type="LineEdit" parent="mainUI/hostWorld"]
+visible = false
+layout_mode = 2
+placeholder_text = "world name NOT YET"
+editable = false
+
+[node name="LineEdit2" type="LineEdit" parent="mainUI/hostWorld"]
+visible = false
+layout_mode = 2
+placeholder_text = "seed NOT YET"
+editable = false
+
+[node name="create" type="Button" parent="mainUI/hostWorld"]
+layout_mode = 2
+text = "New World"
+
+[node name="host" type="Button" parent="mainUI/hostWorld"]
+layout_mode = 2
+text = "Host World
+"
+
+[node name="back" type="Button" parent="mainUI/hostWorld"]
+layout_mode = 2
+text = "Back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="mainUI/hostWorld"]
+layout_mode = 2
+
+[node name="joinWorld" type="VBoxContainer" parent="mainUI"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="textLabel" type="Label" parent="mainUI/joinWorld"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = ">-[ JOIN A WORLD ]----------
+
+"
+
+[node name="LineEdit" type="LineEdit" parent="mainUI/joinWorld"]
+layout_mode = 2
+placeholder_text = "ip address"
+
+[node name="LineEdit2" type="LineEdit" parent="mainUI/joinWorld"]
+layout_mode = 2
+placeholder_text = "port DEFAULT 8080"
+editable = false
+
+[node name="join" type="Button" parent="mainUI/joinWorld"]
+layout_mode = 2
+text = "Join"
+
+[node name="back" type="Button" parent="mainUI/joinWorld"]
+layout_mode = 2
+text = "Back"
+
+[node name="createWorld" type="VBoxContainer" parent="mainUI"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="textLabel" type="Label" parent="mainUI/createWorld"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = ">-[ CREATE WORLD ]----------
+
+"
+
+[node name="world" type="LineEdit" parent="mainUI/createWorld"]
+layout_mode = 2
+placeholder_text = "World name"
+
+[node name="seed" type="LineEdit" parent="mainUI/createWorld"]
+layout_mode = 2
+placeholder_text = "Seed, leave empty for random"
+editable = false
+
+[node name="createAndHost" type="Button" parent="mainUI/createWorld"]
+layout_mode = 2
+text = "Create & Host"
+
+[node name="back" type="Button" parent="mainUI/createWorld"]
+layout_mode = 2
+text = "Back"
+
+[node name="main_ui" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 864.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7s8b1")
+
+[node name="ui_bg" type="NinePatchRect" parent="main_ui"]
+custom_minimum_size = Vector2(576, 352)
+layout_mode = 2
+texture = SubResource("GradientTexture1D_0oq7k")
+
+[node name="mode" type="VBoxContainer" parent="main_ui"]
+visible = false
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+
+[node name="single" type="Button" parent="main_ui/mode"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "SINGLEPLAYER"
+
+[node name="multi" type="Button" parent="main_ui/mode"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "MULTIPLAYER"
+
+[node name="HSeparator" type="HSeparator" parent="main_ui/mode"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="tiny_button" type="HBoxContainer" parent="main_ui/mode"]
+layout_mode = 2
+alignment = 1
+
+[node name="setting" type="Button" parent="main_ui/mode/tiny_button"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Setting"
+
+[node name="VSeparator" type="VSeparator" parent="main_ui/mode/tiny_button"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="char" type="Button" parent="main_ui/mode/tiny_button"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "char"
+
+[node name="multi" type="VBoxContainer" parent="main_ui"]
+visible = false
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="label" type="Label" parent="main_ui/multi"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "HOST or JOIN a WORLD?"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="main_ui/multi"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="host" type="Button" parent="main_ui/multi"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "HOST WORLD"
+
+[node name="join" type="Button" parent="main_ui/multi"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "JOIN WORLD"
+
+[node name="HSeparator2" type="HSeparator" parent="main_ui/multi"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="back" type="Button" parent="main_ui/multi"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "BACK"
+
+[node name="world" type="VBoxContainer" parent="main_ui"]
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_ui/world"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SELECT WORLD"
+horizontal_alignment = 1
+
+[node name="scroll" type="ScrollContainer" parent="main_ui/world"]
+custom_minimum_size = Vector2(512, 128)
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="list" type="VBoxContainer" parent="main_ui/world/scroll"]
+custom_minimum_size = Vector2(492, 128)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="world_name" type="Button" parent="main_ui/world/scroll/list"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+text = "TEST - NOT ACTUAL WORLD"
+alignment = 0
+
+[node name="info" type="Label" parent="main_ui/world/scroll/list/world_name"]
+layout_mode = 2
+offset_top = 45.0
+offset_right = 256.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 8
+text = " size: small (256)
+ seed: 1381379290"
+vertical_alignment = 1
+justification_flags = 128
+
+[node name="world_name2" type="Button" parent="main_ui/world/scroll/list"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+text = "TEST - NOT ACTUAL WORLD"
+alignment = 0
+
+[node name="info" type="Label" parent="main_ui/world/scroll/list/world_name2"]
+layout_mode = 2
+offset_top = 45.0
+offset_right = 256.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 8
+text = " size: small (256)
+ seed: 1381379290"
+vertical_alignment = 1
+justification_flags = 128
+
+[node name="world_name3" type="Button" parent="main_ui/world/scroll/list"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+text = "TEST - NOT ACTUAL WORLD"
+alignment = 0
+
+[node name="info" type="Label" parent="main_ui/world/scroll/list/world_name3"]
+layout_mode = 2
+offset_top = 45.0
+offset_right = 256.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 8
+text = " size: small (256)
+ seed: 1381379290"
+vertical_alignment = 1
+justification_flags = 128
+
+[node name="act" type="HBoxContainer" parent="main_ui/world"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="back" type="Button" parent="main_ui/world/act"]
+layout_mode = 2
+text = "< Back"
+
+[node name="new" type="Button" parent="main_ui/world/act"]
+layout_mode = 2
+text = "New"
+
+[node name="VSeparator" type="VSeparator" parent="main_ui/world/act"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="erase" type="Button" parent="main_ui/world/act"]
+layout_mode = 2
+text = "Erase"
+
+[node name="load" type="Button" parent="main_ui/world/act"]
+layout_mode = 2
+text = "Load >"
+
+[node name="new_world" type="VBoxContainer" parent="main_ui"]
+visible = false
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/new_world"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "NEW WORLD"
+horizontal_alignment = 1
+
+[node name="name" type="LineEdit" parent="main_ui/new_world"]
+layout_mode = 2
+placeholder_text = "WORLD LABEL"
+
+[node name="seed" type="LineEdit" parent="main_ui/new_world"]
+layout_mode = 2
+placeholder_text = "SEED"
+max_length = 16
+
+[node name="size" type="HBoxContainer" parent="main_ui/new_world"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="label" type="Label" parent="main_ui/new_world/size"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SIZE:"
+horizontal_alignment = 1
+
+[node name="size" type="OptionButton" parent="main_ui/new_world/size"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Small"
+popup/item_0/id = 1
+popup/item_1/text = "Medium"
+popup/item_1/id = 2
+popup/item_2/text = "Large"
+popup/item_2/id = 4
+
+[node name="act" type="HBoxContainer" parent="main_ui/new_world"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="back" type="Button" parent="main_ui/new_world/act"]
+layout_mode = 2
+text = "< Back"
+
+[node name="VSeparator" type="VSeparator" parent="main_ui/new_world/act"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="create" type="Button" parent="main_ui/new_world/act"]
+layout_mode = 2
+text = "Create >"
+
+[node name="join_world" type="VBoxContainer" parent="main_ui"]
+visible = false
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/join_world"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "JOIN WORLD"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="main_ui/join_world"]
+layout_mode = 2
+
+[node name="label2" type="Label" parent="main_ui/join_world"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "RECENT WORLDS"
+horizontal_alignment = 1
+
+[node name="recent" type="ScrollContainer" parent="main_ui/join_world"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="address" type="HBoxContainer" parent="main_ui/join_world"]
+layout_mode = 2
+alignment = 1
+
+[node name="ip" type="LineEdit" parent="main_ui/join_world/address"]
+custom_minimum_size = Vector2(176, 0)
+layout_mode = 2
+placeholder_text = "127.0.0.1"
+
+[node name="label" type="Label" parent="main_ui/join_world/address"]
+layout_mode = 2
+text = ":"
+
+[node name="port" type="SpinBox" parent="main_ui/join_world/address"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+max_value = 65535.0
+value = 8080.0
+
+[node name="act" type="HBoxContainer" parent="main_ui/join_world"]
+layout_mode = 2
+alignment = 1
+
+[node name="back" type="Button" parent="main_ui/join_world/act"]
+layout_mode = 2
+text = "BACK
+"
+
+[node name="VSeparator" type="VSeparator" parent="main_ui/join_world/act"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="join" type="Button" parent="main_ui/join_world/act"]
+layout_mode = 2
+text = "JOIN"
+
+[node name="char" type="VBoxContainer" parent="main_ui"]
+visible = false
+custom_minimum_size = Vector2(512, 224)
+layout_mode = 2
+
+[node name="navigation" type="HBoxContainer" parent="main_ui/char"]
+layout_mode = 2
+alignment = 1
+
+[node name="back" type="Button" parent="main_ui/char/navigation"]
+layout_mode = 2
+text = "BACK"
+
+[node name="VSeparator3" type="VSeparator" parent="main_ui/char/navigation"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="info" type="Button" parent="main_ui/char/navigation"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_d7xvy")
+text = "APPEARANCE"
+
+[node name="VSeparator" type="VSeparator" parent="main_ui/char/navigation"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="color" type="Button" parent="main_ui/char/navigation"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_d7xvy")
+text = "COLOR"
+
+[node name="VSeparator2" type="VSeparator" parent="main_ui/char/navigation"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="done" type="Button" parent="main_ui/char/navigation"]
+layout_mode = 2
+text = "DONE"
+
+[node name="appearance" type="VBoxContainer" parent="main_ui/char"]
+custom_minimum_size = Vector2(0, 224)
+layout_mode = 2
+
+[node name="name" type="HBoxContainer" parent="main_ui/char/appearance"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/char/appearance/name"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Name:	"
+
+[node name="input" type="LineEdit" parent="main_ui/char/appearance/name"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+max_length = 20
+
+[node name="hair" type="HBoxContainer" parent="main_ui/char/appearance"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/char/appearance/hair"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Hair:"
+
+[node name="spin_box" type="SpinBox" parent="main_ui/char/appearance/hair"]
+layout_mode = 2
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="main_ui/char/appearance"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/char/appearance/HBoxContainer3"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Shirt:"
+
+[node name="spin_box" type="SpinBox" parent="main_ui/char/appearance/HBoxContainer3"]
+layout_mode = 2
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="main_ui/char/appearance"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="main_ui/char/appearance/HBoxContainer4"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Pants:"
+
+[node name="spin_box" type="SpinBox" parent="main_ui/char/appearance/HBoxContainer4"]
+layout_mode = 2
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="color" type="VBoxContainer" parent="main_ui/char"]
+visible = false
+custom_minimum_size = Vector2(0, 224)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="main_ui/char/color"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_ui/char/color/HBoxContainer2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Hair:"
+
+[node name="SpinBox" type="SpinBox" parent="main_ui/char/color/HBoxContainer2"]
+layout_mode = 2
+min_value = 1.0
+max_value = 256.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="main_ui/char/color"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_ui/char/color/HBoxContainer5"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Skin:"
+
+[node name="SpinBox" type="SpinBox" parent="main_ui/char/color/HBoxContainer5"]
+layout_mode = 2
+min_value = 1.0
+max_value = 256.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="main_ui/char/color"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_ui/char/color/HBoxContainer3"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Shirt:"
+
+[node name="SpinBox" type="SpinBox" parent="main_ui/char/color/HBoxContainer3"]
+layout_mode = 2
+min_value = 1.0
+max_value = 256.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="main_ui/char/color"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main_ui/char/color/HBoxContainer4"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Pants:"
+
+[node name="SpinBox" type="SpinBox" parent="main_ui/char/color/HBoxContainer4"]
+layout_mode = 2
+min_value = 1.0
+max_value = 256.0
+value = 1.0
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="char" type="Sprite2D" parent="main_ui/char"]
+position = Vector2(416, 103)
+scale = Vector2(1.5, 1.5)
+
+[node name="baseLeg" type="Sprite2D" parent="main_ui/char/char"]
+position = Vector2(0, 35)
+scale = Vector2(3, 3)
+texture = ExtResource("3_taxkv")
+hframes = 3
+
+[node name="baseBody" type="Sprite2D" parent="main_ui/char/char"]
+position = Vector2(0, 23)
+scale = Vector2(3, 3)
+texture = ExtResource("4_ftbn5")
+hframes = 3
+
+[node name="baseHead" type="Sprite2D" parent="main_ui/char/char"]
+position = Vector2(0, -8)
+scale = Vector2(3, 3)
+texture = ExtResource("5_r2g50")
+hframes = 3
+
+[connection signal="pressed" from="mainUI/hostWorld/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="mainUI/joinWorld/join" to="." method="_on_join_pressed"]
