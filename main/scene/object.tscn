@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtatb2h3xv7m8"]
+
+[ext_resource type="Script" path="res://main/script/object.gd" id="2_q524r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ph8df"]
+size = Vector2(38, 58)
+
+[node name="object" type="Sprite2D"]
+script = ExtResource("2_q524r")
+
+[node name="object_area" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionShape2D" parent="object_area"]
+shape = SubResource("RectangleShape2D_ph8df")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="area_entered" from="object_area" to="." method="_on_any_area_entered_object_area"]
+[connection signal="area_exited" from="object_area" to="." method="_on_any_area_exited_object_area"]
