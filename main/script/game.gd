@@ -4,8 +4,8 @@ extends Node2D
 @onready var world_size:= 512
 @onready var world_gen:= 'v1'
 
-@onready var ground = $ground
-@onready var environment = $environment
+@onready var ground = $y_sort/ground
+@onready var environment = $y_sort/environment
 
 @onready var peer = ENetMultiplayerPeer
 
@@ -56,7 +56,7 @@ func noise_generation(random_seed:= false):
 	world_generation(noise, env_noise, world_center, falloff_power)
 
 func world_generation(noise, env_noise, world_center, falloff_power:= 0.0):
-	$environment.clear()
+	environment.clear()
 	var source_id = 0
 	var land_coord = Vector2(0, 0)
 	var sand_coord = Vector2(1, 0)
@@ -105,13 +105,15 @@ func _ready() -> void:
 	generation(false)
 
 func _process(delta: float) -> void:
+	$Camera2D.position = $y_sort/player.position
 	if Input.is_action_pressed("debug_1"):
+		pass
 		$Camera2D.position = get_global_mouse_position()
 	if Input.is_action_pressed("key_down"):
 		$Camera2D.zoom += Vector2(0.01, 0.01)
 	elif Input.is_action_pressed("key_up"):
 		$Camera2D.zoom -= Vector2(0.01, 0.01)
-	$render_distance.position = get_global_mouse_position()
+	#$render_distance.position = get_global_mouse_position()
 	if Input.is_action_just_pressed("debug_2"):
 		print("HEYYYY")
 		$CanvasLayer/RichTextLabel.text = "[b]generating...\nplease wait"

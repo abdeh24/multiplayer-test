@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://v1c1jy830joi"]
+
+[ext_resource type="Texture2D" uid="uid://o13d55efnh1i" path="res://res/texture/entity/npc.png" id="1_4fh3f"]
+[ext_resource type="Script" path="res://main/script/npc.gd" id="1_sayjr"]
+
+[sub_resource type="Animation" id="Animation_3c3lw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_365b4"]
+resource_name = "blink"
+length = 2.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eye:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2, 2.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0jxa8"]
+_data = {
+"RESET": SubResource("Animation_3c3lw"),
+"blink": SubResource("Animation_365b4")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ca7h"]
+atlas = ExtResource("1_4fh3f")
+region = Rect2(0, 51, 18, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cijej"]
+atlas = ExtResource("1_4fh3f")
+region = Rect2(0, 44, 24, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2pj0"]
+atlas = ExtResource("1_4fh3f")
+region = Rect2(0, 0, 54, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3ioc"]
+atlas = ExtResource("1_4fh3f")
+region = Rect2(0, 16, 48, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drthg"]
+atlas = ExtResource("1_4fh3f")
+region = Rect2(0, 24, 54, 20)
+
+[node name="npc" type="Node2D"]
+script = ExtResource("1_sayjr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0jxa8")
+}
+
+[node name="foot" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+texture = SubResource("AtlasTexture_4ca7h")
+hframes = 3
+
+[node name="body" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = SubResource("AtlasTexture_cijej")
+offset = Vector2(0, -0.5)
+hframes = 3
+
+[node name="head" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = SubResource("AtlasTexture_y2pj0")
+hframes = 3
+
+[node name="eye" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
+texture = SubResource("AtlasTexture_r3ioc")
+hframes = 3
+
+[node name="hair" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
+texture = SubResource("AtlasTexture_drthg")
+hframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5.655, 5.655)
